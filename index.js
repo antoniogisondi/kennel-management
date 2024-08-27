@@ -3,9 +3,25 @@ const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 const app = express()
 const port = process.env.PORT
+const passport = require('passport')
+const session = require('express-session')
+const loginPassport = require('./config/loginPassport')
 dotenv.config()
 
+const ensureAuth = require('./middleware/ensureAuth')
 const dashboard = require('./routes/dashboard')
+const auth = require('./routes/auth')
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
+app.use(session({
+    secret: 'secret', // Cambia questa con una chiave segreta forte
+    resave: false,
+    saveUninitialized: false,
+}));
+
+loginPassport(passport)
+app.use(passport.initialize());
+app.use(passport.session());
 
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
@@ -24,10 +40,9 @@ app.set('view engine', 'ejs');
 // app.use(express.static(path.join(__dirname, '/node_modules/bootstrap/dist')));
 // app.use(express.static(path.join(__dirname, 'app', 'public')));
 
-app.use(express.json())
-
 app.get('/', (req, res) => {
     res.render('home')
 })
 
-app.use(dashboard)
+app.use(ensureAuth, dashboard)
+app.use(auth)
