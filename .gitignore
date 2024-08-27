@@ -1,0 +1,39 @@
+# Node.js dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build directories
+/dist
+/build
+/public/build
+
+# System files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Test coverage
+coverage/
+
+# Temporary files
+.temp/
+.cache/
+
+# Docker files
+docker-compose.override.yml
+.dockerignore
+
+# SSL certificates
+*.pem
+*.crt
+*.key
