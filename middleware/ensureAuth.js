@@ -1,9 +1,9 @@
 // middleware/authMiddleware.js
 function ensureAuthenticated(req, res, next) {
     if (!req.isAuthenticated()) {
-        // res.redirect('/login');
+        // return res.render('auth/login');
     }
-    return next();
+    next();
 }
 
 module.exports = ensureAuthenticated;
