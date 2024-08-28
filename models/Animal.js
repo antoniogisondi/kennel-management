@@ -16,6 +16,6 @@ const AnimalSchema = new mongoose.Schema({
     notes: { type: String } // Additional notes
 });
 
-const Animal = mongoose.model('Animal', AnimalSchema);
+const Animal = mongoose.model('Animal', AnimalSchema, 'animals');
 
 module.exports = Animal;

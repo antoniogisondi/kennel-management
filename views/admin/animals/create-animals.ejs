@@ -4,11 +4,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Crea un Nuovo Animale</title>
 </head>
 
 <body>
+    <h1>Crea un Nuovo Animale</h1>
+    <form action="/dashboard/add-animals" method="POST">
+        <label for="name">Nome:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
 
+        <label for="species">Specie:</label><br>
+        <input type="text" id="species" name="species" required><br><br>
+
+        <label for="breed">Razza:</label><br>
+        <input type="text" id="breed" name="breed"><br><br>
+
+        <label for="age">Età:</label><br>
+        <input type="number" id="age" name="age" min="0"><br><br>
+
+        <label for="gender">Genere:</label><br>
+        <select id="gender" name="gender" required>
+            <option value="Male">Maschio</option>
+            <option value="Female">Femmina</option>
+        </select><br><br>
+
+        <label for="description">Descrizione:</label><br>
+        <textarea id="description" name="description"></textarea><br><br>
+
+        <label for="arrivalDate">Data di Arrivo:</label><br>
+        <input type="date" id="arrivalDate" name="arrivalDate"><br><br>
+
+        <label for="adopted">Adottato:</label><br>
+        <input type="checkbox" id="adopted" name="adopted"><br><br>
+
+        <label for="healthStatus">Stato di Salute:</label><br>
+        <input type="text" id="healthStatus" name="healthStatus"><br><br>
+
+        <label for="vaccinations">Vaccinazioni (separate da virgole):</label><br>
+        <input type="text" id="vaccinations" name="vaccinations"><br><br>
+
+        <label for="adoptionDate">Data di Adozione:</label><br>
+        <input type="date" id="adoptionDate" name="adoptionDate"><br><br>
+
+        <label for="photoUrl">URL della Foto:</label><br>
+        <input type="url" id="photoUrl" name="photoUrl"><br><br>
+
+        <label for="notes">Note:</label><br>
+        <textarea id="notes" name="notes"></textarea><br><br>
+
+        <button type="submit">Crea Animale</button>
+    </form>
 </body>
 
 </html>

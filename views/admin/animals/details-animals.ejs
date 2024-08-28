@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Dettagli di <%= animal.name %>
+        </h1>
+        <div class="animal-details">
+            <% if (animal.photoUrl) { %>
+                <img src="<%= animal.photoUrl %>" alt="Foto di <%= animal.name %>">
+                <% } %>
+                    <h2>Informazioni Generali</h2>
+                    <p><strong>Nome:</strong>
+                        <%= animal.name %>
+                    </p>
+                    <p><strong>Specie:</strong>
+                        <%= animal.species %>
+                    </p>
+                    <p><strong>Razza:</strong>
+                        <%= animal.breed %>
+                    </p>
+                    <p><strong>Età:</strong>
+                        <%= animal.age %> anni
+                    </p>
+                    <p><strong>Genere:</strong>
+                        <%= animal.gender %>
+                    </p>
+                    <p><strong>Descrizione:</strong>
+                        <%= animal.description %>
+                    </p>
+                    <h2>Stato e Salute</h2>
+                    <p><strong>Stato di Salute:</strong>
+                        <%= animal.healthStatus %>
+                    </p>
+                    <p><strong>Vaccinazioni:</strong>
+                        <%= animal.vaccinations.join(', ') %></p>
+            <p><strong>Data di Arrivo:</strong> <%= animal.arrivalDate.toDateString() %></p>
+            <% if (animal.adopted) { %>
+                <p><strong>Adottato:</strong> Sì</p>
+                <% if (animal.adoptionDate) { %>
+                    <p><strong>Data di Adozione:</strong> <%= animal.adoptionDate.toDateString() %></p>
+                <% } %>
+            <% } else { %>
+                <p><strong>Adottato:</strong> No</p>
+            <% } %>
+            <h2>Note Aggiuntive</h2>
+            <p><%= animal.notes %></p>
+        </div>
+        <a href="/animals" class="back-link">Torna alla lista degli animali</a>
+    </div>
+</body>
+
+</html>

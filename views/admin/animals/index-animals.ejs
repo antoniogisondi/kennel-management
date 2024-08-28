@@ -8,7 +8,46 @@
 </head>
 
 <body>
-
+    <h1>Lista degli Animali</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Specie</th>
+                <th>Razza</th>
+                <th>Età</th>
+                <th>Genere</th>
+                <th>Stato di Salute</th>
+                <th>Dettagli</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% animals.forEach(animal=> { %>
+                <tr>
+                    <td>
+                        <%= animal.name %>
+                    </td>
+                    <td>
+                        <%= animal.species %>
+                    </td>
+                    <td>
+                        <%= animal.breed %>
+                    </td>
+                    <td>
+                        <%= animal.age %>
+                    </td>
+                    <td>
+                        <%= animal.gender %>
+                    </td>
+                    <td>
+                        <%= animal.healthStatus %>
+                    </td>
+                    <td><a href="/animals/<%= animal._id %>">Vedi Dettagli</a></td>
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
+    <a href="/dashboard/add-animals">Crea un nuovo animale</a>
 </body>
 
 </html>
