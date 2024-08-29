@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const User = require('../models/User')
 const Animal = require('../models/Animal')
 
 router.get('/dashboard', (req, res) => {
@@ -50,7 +49,7 @@ router.post('/dashboard/add-animals', async (req, res) => {
     }
 })
 
-router.get('/animals/:id', async (req, res) => {
+router.get('/dashboard/animals/:id', async (req, res) => {
     try {
         const animal = await Animal.findById(req.params.id);
         if (!animal) {
@@ -63,5 +62,53 @@ router.get('/animals/:id', async (req, res) => {
     }
 });
 
+router.get('/dashboard/animals/:id/edit-animals', async (req, res) => {
+    try {
+        const animal = await Animal.findById(req.params.id)
+        if (!animal) {
+            return res.redirect('/dashboard/animals')
+        }
+        res.render('admin/animals/edit-animals', { animal })
+    } catch (error) {
+        res.status(500).json({ message: err.message })
+    }
+})
+
+router.put('/dashboard/animals/:id/edit-animals', async (req, res) => {
+    try {
+        const animalId = req.params.id;
+        if (!animalId) {
+            return res.status(400).json({ message: 'ID non valido' });
+        }
+
+        const animal = await Animal.findById(animalId);
+        if (!animal) {
+            return res.status(404).json({ message: 'Animale non trovato' });
+        }
+
+        // Aggiorna i campi dell'animale con i dati forniti
+        Object.assign(animal, req.body);
+
+        const updatedAnimal = await animal.save();
+        res.redirect(`/dashboard/animals/${animalId}`)
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+// Rotta per eliminare un animale
+router.delete('/dashboard/animals/:id/delete', async (req, res) => {
+    try {
+        const animal = await Animal.findById(req.params.id);
+        if (!animal) {
+            return res.status(404).json({ message: 'Animale non trovato' });
+        }
+
+        await animal.deleteOne({ _id: animal._id });
+        res.redirect('/dashboard/animals')
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
 
 module.exports = router

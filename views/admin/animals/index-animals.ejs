@@ -42,7 +42,13 @@
                     <td>
                         <%= animal.healthStatus %>
                     </td>
-                    <td><a href="/animals/<%= animal._id %>">Vedi Dettagli</a></td>
+                    <td>
+                        <a href="/dashboard/animals/<%= animal._id %>">Vedi Dettagli</a>
+                        <a href="/dashboard/animals/<%= animal._id %>/edit-animals">Modifica</a>
+                        <form action="/dashboard/animals/<%=animal._id%>/delete?_method=DELETE" method="POST">
+                            <button type="submit">Elimina l'animale</button>
+                        </form>
+                    </td>
                 </tr>
                 <% }) %>
         </tbody>

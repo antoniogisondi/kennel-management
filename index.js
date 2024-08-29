@@ -5,6 +5,7 @@ const app = express()
 const port = process.env.PORT
 const passport = require('passport')
 const session = require('express-session')
+const methodOverride = require('method-override')
 const loginPassport = require('./config/loginPassport')
 dotenv.config()
 
@@ -19,7 +20,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
 }));
-
+app.use(methodOverride('_method'))
 loginPassport(passport)
 app.use(passport.initialize());
 app.use(passport.session());
