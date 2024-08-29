@@ -4,6 +4,9 @@ const User = require('../models/User')
 const Animal = require('../models/Animal')
 
 router.get('/dashboard', (req, res) => {
+    if (!req.isAuthenticated()) {
+        return res.redirect
+    }
     const user = req.user
     res.render('admin/dashboard', { user })
 })
