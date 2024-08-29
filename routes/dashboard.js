@@ -19,33 +19,21 @@ router.get('/dashboard/animals', async (req, res) => {
     }
 });
 
-router.get('/dashboard/add-animals', (req, res) => {
+router.get('/dashboard/animals/add-animals', (req, res) => {
     res.render('admin/animals/create-animals')
 })
 
 
-router.post('/dashboard/add-animals', async (req, res) => {
+router.post('/dashboard/animals/add-animals', async (req, res) => {
     try {
-        const { name, species, breed, age, gender, description, arrivalDate, adopted, healthStatus, vaccinations, adoptionDate, photoUrl, notes } = req.body;
-        const savedAnimal = new Animal({
-            name,
-            species,
-            breed,
-            age,
-            gender,
-            description,
-            arrivalDate,
-            adopted: adopted ? true : false,
-            healthStatus,
-            vaccinations: vaccinations.split(',').map(vaccine => vaccine.trim()),
-            adoptionDate,
-            photoUrl,
-            notes
-        });
+        if (req.body.therapy) {
+            req.body.therapy = req.body.therapy.filter(t => t.name || t.dosage || t.startDate || t.endDate);
+        }
+        const savedAnimal = new Animal(req.body);
         const animal = await savedAnimal.save();
         res.redirect('/dashboard/animals')
     } catch (error) {
-        res.status(500).json({ message: err.message });
+        res.status(500).json({ message: error.message });
     }
 })
 

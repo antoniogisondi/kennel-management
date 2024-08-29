@@ -4,56 +4,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crea un Nuovo Animale</title>
+    <title>Crea Nuovo Animale</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 10px;
+        }
+
+        input,
+        select,
+        textarea {
+            padding: 8px;
+            margin-top: 5px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Crea un Nuovo Animale</h1>
-    <form action="/dashboard/add-animals" method="POST">
-        <label for="name">Nome:</label><br>
-        <input type="text" id="name" name="name" required><br><br>
+    <div class="container">
+        <h1>Crea Nuovo Animale</h1>
+        <form action="/dashboard/animals/add-animals" method="POST">
+            <label for="name">Nome:</label>
+            <input type="text" id="name" name="name" required>
 
-        <label for="species">Specie:</label><br>
-        <input type="text" id="species" name="species" required><br><br>
+            <label for="species">Specie:</label>
+            <input type="text" id="species" name="species" required>
 
-        <label for="breed">Razza:</label><br>
-        <input type="text" id="breed" name="breed"><br><br>
+            <label for="breed">Razza:</label>
+            <input type="text" id="breed" name="breed">
 
-        <label for="age">Età:</label><br>
-        <input type="number" id="age" name="age" min="0"><br><br>
+            <label for="age">Età:</label>
+            <input type="number" id="age" name="age" min="0">
 
-        <label for="gender">Genere:</label><br>
-        <select id="gender" name="gender" required>
-            <option value="Male">Maschio</option>
-            <option value="Female">Femmina</option>
-        </select><br><br>
+            <label for="gender">Genere:</label>
+            <select id="gender" name="gender" required>
+                <option value="Male">Maschio</option>
+                <option value="Female">Femmina</option>
+            </select>
 
-        <label for="description">Descrizione:</label><br>
-        <textarea id="description" name="description"></textarea><br><br>
+            <label for="description">Descrizione:</label>
+            <textarea id="description" name="description"></textarea>
 
-        <label for="arrivalDate">Data di Arrivo:</label><br>
-        <input type="date" id="arrivalDate" name="arrivalDate"><br><br>
+            <label for="arrivalDate">Data di Arrivo:</label>
+            <input type="date" id="arrivalDate" name="arrivalDate">
 
-        <label for="adopted">Adottato:</label><br>
-        <input type="checkbox" id="adopted" name="adopted"><br><br>
+            <label for="adopted">Adottato:</label>
+            <input type="checkbox" id="adopted" name="adopted">
 
-        <label for="healthStatus">Stato di Salute:</label><br>
-        <input type="text" id="healthStatus" name="healthStatus"><br><br>
+            <label for="healthStatus">Stato di Salute:</label>
+            <input type="text" id="healthStatus" name="healthStatus">
 
-        <label for="vaccinations">Vaccinazioni (separate da virgole):</label><br>
-        <input type="text" id="vaccinations" name="vaccinations"><br><br>
+            <label for="vaccinations">Vaccinazioni (separate da virgole):</label>
+            <input type="text" id="vaccinations" name="vaccinations">
 
-        <label for="adoptionDate">Data di Adozione:</label><br>
-        <input type="date" id="adoptionDate" name="adoptionDate"><br><br>
+            <label for="adoptionDate">Data di Adozione:</label>
+            <input type="date" id="adoptionDate" name="adoptionDate">
 
-        <label for="photoUrl">URL della Foto:</label><br>
-        <input type="url" id="photoUrl" name="photoUrl"><br><br>
+            <label for="photoUrl">URL della Foto:</label>
+            <input type="url" id="photoUrl" name="photoUrl">
 
-        <label for="notes">Note:</label><br>
-        <textarea id="notes" name="notes"></textarea><br><br>
+            <label for="notes">Note:</label>
+            <textarea id="notes" name="notes"></textarea>
 
-        <button type="submit">Crea Animale</button>
-    </form>
+            <!-- Nuovi campi -->
+            <label for="deathDate">Data di Decesso (se applicabile):</label>
+            <input type="date" id="deathDate" name="deathDate">
+
+            <label for="microchipNumber">Numero di Microchip:</label>
+            <input type="text" id="microchipNumber" name="microchipNumber" required>
+
+            <label for="isSterilized">Sterilizzato:</label>
+            <input type="checkbox" id="isSterilized" name="sterilization.isSterilized">
+
+            <label for="sterilizationDate">Data di Sterilizzazione:</label>
+            <input type="date" id="sterilizationDate" name="sterilization.sterilizationDate">
+
+            <label for="method">Metodo di Sterilizzazione:</label>
+            <input type="text" id="method" name="sterilization.method">
+
+            <h3>Terapie Farmacologiche:</h3>
+            <div id="therapyContainer">
+                <div class="therapy">
+                    <label for="therapyName0">Nome della Terapia:</label>
+                    <input type="text" id="therapyName0" name="therapy[0].name">
+
+                    <label for="therapyDosage0">Dosaggio:</label>
+                    <input type="text" id="therapyDosage0" name="therapy[0].dosage">
+
+                    <label for="therapyStartDate0">Data Inizio:</label>
+                    <input type="date" id="therapyStartDate0" name="therapy[0].startDate">
+
+                    <label for="therapyEndDate0">Data Fine:</label>
+                    <input type="date" id="therapyEndDate0" name="therapy[0].endDate">
+                </div>
+            </div>
+
+            <button type="button" onclick="addTherapy()">Aggiungi Terapia</button>
+
+            <button type="submit">Crea Animale</button>
+        </form>
+    </div>
+
+    <script>
+        let therapyIndex = 1;
+
+        function addTherapy() {
+            const container = document.getElementById('therapyContainer');
+            const newTherapy = document.createElement('div');
+            newTherapy.classList.add('therapy');
+
+            newTherapy.innerHTML = `
+                <label for="therapyName${therapyIndex}">Nome della Terapia:</label>
+                <input type="text" id="therapyName${therapyIndex}" name="therapy[${therapyIndex}].name">
+
+                <label for="therapyDosage${therapyIndex}">Dosaggio:</label>
+                <input type="text" id="therapyDosage${therapyIndex}" name="therapy[${therapyIndex}].dosage">
+
+                <label for="therapyStartDate${therapyIndex}">Data Inizio:</label>
+                <input type="date" id="therapyStartDate${therapyIndex}" name="therapy[${therapyIndex}].startDate">
+
+                <label for="therapyEndDate${therapyIndex}">Data Fine:</label>
+                <input type="date" id="therapyEndDate${therapyIndex}" name="therapy[${therapyIndex}].endDate">
+            `;
+
+            container.appendChild(newTherapy);
+            therapyIndex++;
+        }
+    </script>
 </body>
 
 </html>
