@@ -4,55 +4,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dettagli di <%= animal.name %>
+    </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .detail-section {
+            margin-bottom: 20px;
+        }
+
+        .detail-section h2 {
+            margin-bottom: 10px;
+        }
+
+        .detail-section p {
+            margin: 5px 0;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
         <h1>Dettagli di <%= animal.name %>
         </h1>
-        <div class="animal-details">
-            <% if (animal.photoUrl) { %>
-                <img src="<%= animal.photoUrl %>" alt="Foto di <%= animal.name %>">
+
+        <div class="detail-section">
+            <h2>Informazioni Generali</h2>
+            <p><strong>Nome:</strong>
+                <%= animal.name %>
+            </p>
+            <p><strong>Specie:</strong>
+                <%= animal.species %>
+            </p>
+            <p><strong>Razza:</strong>
+                <%= animal.breed %>
+            </p>
+            <p><strong>Età:</strong>
+                <%= animal.age %> anni
+            </p>
+            <p><strong>Genere:</strong>
+                <%= animal.gender %>
+            </p>
+            <p><strong>Descrizione:</strong>
+                <%= animal.description %>
+            </p>
+            <p><strong>Data di Arrivo:</strong>
+                <%= animal.arrivalDate.toDateString() %>
+            </p>
+            <p><strong>Adottato:</strong>
+                <%= animal.adopted ? 'Sì' : 'No' %>
+            </p>
+            <% if (animal.adopted && animal.adoptionDate) { %>
+                <p><strong>Data di Adozione:</strong>
+                    <%= animal.adoptionDate.toDateString() %>
+                </p>
                 <% } %>
-                    <h2>Informazioni Generali</h2>
-                    <p><strong>Nome:</strong>
-                        <%= animal.name %>
-                    </p>
-                    <p><strong>Specie:</strong>
-                        <%= animal.species %>
-                    </p>
-                    <p><strong>Razza:</strong>
-                        <%= animal.breed %>
-                    </p>
-                    <p><strong>Età:</strong>
-                        <%= animal.age %> anni
-                    </p>
-                    <p><strong>Genere:</strong>
-                        <%= animal.gender %>
-                    </p>
-                    <p><strong>Descrizione:</strong>
-                        <%= animal.description %>
-                    </p>
-                    <h2>Stato e Salute</h2>
-                    <p><strong>Stato di Salute:</strong>
-                        <%= animal.healthStatus %>
-                    </p>
-                    <p><strong>Vaccinazioni:</strong>
-                        <%= animal.vaccinations.join(', ') %></p>
-            <p><strong>Data di Arrivo:</strong> <%= animal.arrivalDate.toDateString() %></p>
-            <% if (animal.adopted) { %>
-                <p><strong>Adottato:</strong> Sì</p>
-                <% if (animal.adoptionDate) { %>
-                    <p><strong>Data di Adozione:</strong> <%= animal.adoptionDate.toDateString() %></p>
-                <% } %>
-            <% } else { %>
-                <p><strong>Adottato:</strong> No</p>
-            <% } %>
-            <h2>Note Aggiuntive</h2>
-            <p><%= animal.notes %></p>
         </div>
-        <a href="/dashboard/animals" class="back-link">Torna alla lista degli animali</a>
+
+        <div class="detail-section">
+            <h2>Stato di Salute</h2>
+            <p><strong>Stato di Salute:</strong>
+                <%= animal.healthStatus %>
+            </p>
+            <p><strong>Vaccinazioni:</strong>
+                <%= animal.vaccinations.join(', ') %></p>
+        </div>
+
+        <% if (animal.photoUrl) { %>
+        <div class="detail-section">
+            <h2>Foto</h2>
+            <img src="<%= animal.photoUrl %>" alt="Foto di <%= animal.name %>" style="max-width: 100%;">
+        </div>
+        <% } %>
+
+        <div class="detail-section">
+            <h2>Altre Informazioni</h2>
+            <p><strong>Note:</strong> <%= animal.notes %></p>
+        </div>
+
+        <!-- Nuovi campi -->
+        <div class="detail-section">
+            <h2>Dettagli Aggiuntivi</h2>
+            <% if (animal.deathDate) { %>
+                <p><strong>Data di Decesso:</strong>
+                    <%= animal.deathDate.toDateString() %>
+                </p>
+                <% } %>
+                    <p><strong>Numero di Microchip:</strong>
+                        <%= animal.microchipNumber %>
+                    </p>
+                    <p><strong>Sterilizzato:</strong>
+                        <%= animal.sterilization.isSterilized ? ' Sì' : 'No' %>
+            </p>
+            <% if (animal.sterilization.isSterilized) { %>
+                <p><strong>Data di Sterilizzazione:</strong>
+                    <%= animal.sterilization.sterilizationDate ? animal.sterilization.sterilizationDate.toDateString()
+                        : 'Non specificata' %>
+                </p>
+                <p><strong>Metodo di Sterilizzazione:</strong>
+                    <%= animal.sterilization.method %>
+                </p>
+                <% } %>
+        </div>
+
+        <!-- Terapie -->
+        <% if (animal.therapy.length> 0) { %>
+            <div class="detail-section">
+                <h2>Terapie Farmacologiche</h2>
+                <% animal.therapy.forEach(function(therapy) { %>
+                    <div class="therapy">
+                        <p><strong>Nome della Terapia:</strong>
+                            <%= therapy.name %>
+                        </p>
+                        <p><strong>Dosaggio:</strong>
+                            <%= therapy.dosage %>
+                        </p>
+                        <p><strong>Data Inizio:</strong>
+                            <%= therapy.startDate ? therapy.startDate.toDateString() : 'Non specificata' %>
+                        </p>
+                        <% if (therapy.endDate) { %>
+                            <p><strong>Data Fine:</strong>
+                                <%= therapy.endDate.toDateString() %>
+                            </p>
+                            <% } %>
+                    </div>
+                    <% }) %>
+            </div>
+            <% } %>
+
+                <a href="/dashboard/animals">Torna alla lista degli animali</a>
     </div>
 </body>
 
