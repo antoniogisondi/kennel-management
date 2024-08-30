@@ -1,158 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+<%- include('../../partials/head')%>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modifica Animale </title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
+    <body>
+        <div class="container">
+            <h1>Modifica i Dettagli di <%= animal.name %>
+            </h1>
+            <form action="/dashboard/animals/<%= animal._id %>/edit-animals?_method=PUT" method="POST">
+                <label for="name">Nome:</label>
+                <input type="text" id="name" name="name" value="<%= animal.name %>" required>
 
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+                <label for="species">Specie:</label>
+                <input type="text" id="species" name="species" value="<%= animal.species %>" required>
 
-        form {
-            display: flex;
-            flex-direction: column;
-        }
+                <label for="breed">Razza:</label>
+                <input type="text" id="breed" name="breed" value="<%= animal.breed %>">
 
-        label {
-            margin-top: 10px;
-        }
+                <label for="age">Età:</label>
+                <input type="number" id="age" name="age" value="<%= animal.age %>" min="0">
 
-        input,
-        select,
-        textarea {
-            padding: 8px;
-            margin-top: 5px;
-        }
+                <label for="gender">Genere:</label>
+                <select id="gender" name="gender" required>
+                    <option value="Male" <%=animal.gender==='Male' ? 'selected' : '' %>>Maschio</option>
+                    <option value="Female" <%=animal.gender==='Female' ? 'selected' : '' %>>Femmina</option>
+                </select>
 
-        button {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
+                <label for="description">Descrizione:</label>
+                <textarea id="description" name="description"><%= animal.description %></textarea>
 
-        button:hover {
-            background-color: #45a049;
-        }
-    </style>
-</head>
+                <label for="arrivalDate">Data di Arrivo:</label>
+                <input type="date" id="arrivalDate" name="arrivalDate"
+                    value="<%= animal.arrivalDate.toISOString().split('T')[0] %>">
 
-<body>
-    <div class="container">
-        <h1>Modifica i Dettagli di <%= animal.name %>
-        </h1>
-        <form action="/dashboard/animals/<%= animal._id %>/edit-animals?_method=PUT" method="POST">
-            <label for="name">Nome:</label>
-            <input type="text" id="name" name="name" value="<%= animal.name %>" required>
+                <label for="adopted">Adottato:</label>
+                <input type="checkbox" id="adopted" name="adopted" <%=animal.adopted ? 'checked' : '' %>>
 
-            <label for="species">Specie:</label>
-            <input type="text" id="species" name="species" value="<%= animal.species %>" required>
+                <label for="healthStatus">Stato di Salute:</label>
+                <input type="text" id="healthStatus" name="healthStatus" value="<%= animal.healthStatus %>">
 
-            <label for="breed">Razza:</label>
-            <input type="text" id="breed" name="breed" value="<%= animal.breed %>">
+                <label for="vaccinations">Vaccinazioni (separate da virgole):</label>
+                <input type="text" id="vaccinations" name="vaccinations" value="<%= animal.vaccinations.join(', ') %>">
 
-            <label for="age">Età:</label>
-            <input type="number" id="age" name="age" value="<%= animal.age %>" min="0">
+                <label for="adoptionDate">Data di Adozione:</label>
+                <input type="date" id="adoptionDate" name="adoptionDate"
+                    value="<%= animal.adoptionDate ? animal.adoptionDate.toISOString().split('T')[0] : '' %>">
 
-            <label for="gender">Genere:</label>
-            <select id="gender" name="gender" required>
-                <option value="Male" <%=animal.gender==='Male' ? 'selected' : '' %>>Maschio</option>
-                <option value="Female" <%=animal.gender==='Female' ? 'selected' : '' %>>Femmina</option>
-            </select>
+                <label for="photoUrl">URL della Foto:</label>
+                <input type="url" id="photoUrl" name="photoUrl" value="<%= animal.photoUrl %>">
 
-            <label for="description">Descrizione:</label>
-            <textarea id="description" name="description"><%= animal.description %></textarea>
+                <label for="notes">Note:</label>
+                <textarea id="notes" name="notes"><%= animal.notes %></textarea>
 
-            <label for="arrivalDate">Data di Arrivo:</label>
-            <input type="date" id="arrivalDate" name="arrivalDate"
-                value="<%= animal.arrivalDate.toISOString().split('T')[0] %>">
+                <label for="deathDate">Data di Decesso (se applicabile):</label>
+                <input type="date" id="deathDate" name="deathDate"
+                    value="<%= animal.deathDate ? animal.deathDate.toISOString().split('T')[0] : '' %>">
 
-            <label for="adopted">Adottato:</label>
-            <input type="checkbox" id="adopted" name="adopted" <%=animal.adopted ? 'checked' : '' %>>
+                <label for="microchipNumber">Numero di Microchip:</label>
+                <input type="text" id="microchipNumber" name="microchipNumber" value="<%= animal.microchipNumber %>"
+                    required>
 
-            <label for="healthStatus">Stato di Salute:</label>
-            <input type="text" id="healthStatus" name="healthStatus" value="<%= animal.healthStatus %>">
+                <label for="isSterilized">Sterilizzato:</label>
+                <input type="checkbox" id="isSterilized" name="sterilization.isSterilized"
+                    <%=animal.sterilization.isSterilized ? 'checked' : '' %>>
 
-            <label for="vaccinations">Vaccinazioni (separate da virgole):</label>
-            <input type="text" id="vaccinations" name="vaccinations" value="<%= animal.vaccinations.join(', ') %>">
+                <label for="sterilizationDate">Data di Sterilizzazione:</label>
+                <input type="date" id="sterilizationDate" name="sterilization.sterilizationDate"
+                    value="<%= animal.sterilization.sterilizationDate ? animal.sterilization.sterilizationDate.toISOString().split('T')[0] : '' %>">
 
-            <label for="adoptionDate">Data di Adozione:</label>
-            <input type="date" id="adoptionDate" name="adoptionDate"
-                value="<%= animal.adoptionDate ? animal.adoptionDate.toISOString().split('T')[0] : '' %>">
+                <label for="method">Metodo di Sterilizzazione:</label>
+                <input type="text" id="method" name="sterilization.method" value="<%= animal.sterilization.method %>">
 
-            <label for="photoUrl">URL della Foto:</label>
-            <input type="url" id="photoUrl" name="photoUrl" value="<%= animal.photoUrl %>">
+                <h3>Terapie Farmacologiche:</h3>
+                <div id="therapyContainer">
+                    <% animal.therapy.forEach(function(therapy, index) { %>
+                        <div class="therapy">
+                            <label for="therapyName<%= index %>">Nome della Terapia:</label>
+                            <input type="text" id="therapyName<%= index %>" name="therapy[<%= index %>].name"
+                                value="<%= therapy.name %>">
 
-            <label for="notes">Note:</label>
-            <textarea id="notes" name="notes"><%= animal.notes %></textarea>
+                            <label for="therapyDosage<%= index %>">Dosaggio:</label>
+                            <input type="text" id="therapyDosage<%= index %>" name="therapy[<%= index %>].dosage"
+                                value="<%= therapy.dosage %>">
 
-            <label for="deathDate">Data di Decesso (se applicabile):</label>
-            <input type="date" id="deathDate" name="deathDate"
-                value="<%= animal.deathDate ? animal.deathDate.toISOString().split('T')[0] : '' %>">
+                            <label for="therapyStartDate<%= index %>">Data Inizio:</label>
+                            <input type="date" id="therapyStartDate<%= index %>" name="therapy[<%= index %>].startDate"
+                                value="<%= therapy.startDate ? therapy.startDate.toISOString().split('T')[0] : '' %>">
 
-            <label for="microchipNumber">Numero di Microchip:</label>
-            <input type="text" id="microchipNumber" name="microchipNumber" value="<%= animal.microchipNumber %>"
-                required>
+                            <label for="therapyEndDate<%= index %>">Data Fine:</label>
+                            <input type="date" id="therapyEndDate<%= index %>" name="therapy[<%= index %>].endDate"
+                                value="<%= therapy.endDate ? therapy.endDate.toISOString().split('T')[0] : '' %>">
+                        </div>
+                        <% }) %>
+                </div>
 
-            <label for="isSterilized">Sterilizzato:</label>
-            <input type="checkbox" id="isSterilized" name="sterilization.isSterilized"
-                <%=animal.sterilization.isSterilized ? 'checked' : '' %>>
+                <button type="button" onclick="addTherapy()">Aggiungi Terapia</button>
 
-            <label for="sterilizationDate">Data di Sterilizzazione:</label>
-            <input type="date" id="sterilizationDate" name="sterilization.sterilizationDate"
-                value="<%= animal.sterilization.sterilizationDate ? animal.sterilization.sterilizationDate.toISOString().split('T')[0] : '' %>">
+                <button type="submit">Aggiorna Animale</button>
+            </form>
+        </div>
 
-            <label for="method">Metodo di Sterilizzazione:</label>
-            <input type="text" id="method" name="sterilization.method" value="<%= animal.sterilization.method %>">
+        <script>
+            let therapyIndex = <%= animal.therapy.length %>;
 
-            <h3>Terapie Farmacologiche:</h3>
-            <div id="therapyContainer">
-                <% animal.therapy.forEach(function(therapy, index) { %>
-                    <div class="therapy">
-                        <label for="therapyName<%= index %>">Nome della Terapia:</label>
-                        <input type="text" id="therapyName<%= index %>" name="therapy[<%= index %>].name"
-                            value="<%= therapy.name %>">
+            function addTherapy() {
+                const container = document.getElementById('therapyContainer');
+                const newTherapy = document.createElement('div');
+                newTherapy.classList.add('therapy');
 
-                        <label for="therapyDosage<%= index %>">Dosaggio:</label>
-                        <input type="text" id="therapyDosage<%= index %>" name="therapy[<%= index %>].dosage"
-                            value="<%= therapy.dosage %>">
-
-                        <label for="therapyStartDate<%= index %>">Data Inizio:</label>
-                        <input type="date" id="therapyStartDate<%= index %>" name="therapy[<%= index %>].startDate"
-                            value="<%= therapy.startDate ? therapy.startDate.toISOString().split('T')[0] : '' %>">
-
-                        <label for="therapyEndDate<%= index %>">Data Fine:</label>
-                        <input type="date" id="therapyEndDate<%= index %>" name="therapy[<%= index %>].endDate"
-                            value="<%= therapy.endDate ? therapy.endDate.toISOString().split('T')[0] : '' %>">
-                    </div>
-                    <% }) %>
-            </div>
-
-            <button type="button" onclick="addTherapy()">Aggiungi Terapia</button>
-
-            <button type="submit">Aggiorna Animale</button>
-        </form>
-    </div>
-
-    <script>
-        let therapyIndex = <%= animal.therapy.length %>;
-
-        function addTherapy() {
-            const container = document.getElementById('therapyContainer');
-            const newTherapy = document.createElement('div');
-            newTherapy.classList.add('therapy');
-
-            newTherapy.innerHTML = `
+                newTherapy.innerHTML = `
                 <label for="therapyName${therapyIndex}">Nome della Terapia:</label>
                 <input type="text" id="therapyName${therapyIndex}" name="therapy[${therapyIndex}].name">
 
@@ -166,10 +121,10 @@
                 <input type="date" id="therapyEndDate${therapyIndex}" name="therapy[${therapyIndex}].endDate">
             `;
 
-            container.appendChild(newTherapy);
-            therapyIndex++;
-        }
-    </script>
-</body>
+                container.appendChild(newTherapy);
+                therapyIndex++;
+            }
+        </script>
+    </body>
 
 </html>

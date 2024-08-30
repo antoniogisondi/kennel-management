@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const path = require('path')
 const dotenv = require('dotenv')
 const app = express()
 const port = process.env.PORT
@@ -15,6 +16,7 @@ const auth = require('./routes/auth')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
     secret: 'secret', // Cambia questa con una chiave segreta forte
     resave: false,

@@ -1,163 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crea Nuovo Animale</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
+<%- include('../../partials/head') %>
 
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            margin-top: 10px;
-        }
-
-        input,
-        select,
-        textarea {
-            padding: 8px;
-            margin-top: 5px;
-        }
-
-        button {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="container">
-        <h1>Crea Nuovo Animale</h1>
-        <form action="/dashboard/animals/add-animals" method="POST">
-            <label for="name">Nome:</label>
-            <input type="text" id="name" name="name" required>
-
-            <label for="species">Specie:</label>
-            <input type="text" id="species" name="species" required>
-
-            <label for="breed">Razza:</label>
-            <input type="text" id="breed" name="breed">
-
-            <label for="age">Età:</label>
-            <input type="number" id="age" name="age" min="0">
-
-            <label for="gender">Genere:</label>
-            <select id="gender" name="gender" required>
-                <option value="Male">Maschio</option>
-                <option value="Female">Femmina</option>
-            </select>
-
-            <label for="description">Descrizione:</label>
-            <textarea id="description" name="description"></textarea>
-
-            <label for="arrivalDate">Data di Arrivo:</label>
-            <input type="date" id="arrivalDate" name="arrivalDate">
-
-            <label for="adopted">Adottato:</label>
-            <input type="checkbox" id="adopted" name="adopted">
-
-            <label for="healthStatus">Stato di Salute:</label>
-            <input type="text" id="healthStatus" name="healthStatus">
-
-            <label for="vaccinations">Vaccinazioni (separate da virgole):</label>
-            <input type="text" id="vaccinations" name="vaccinations">
-
-            <label for="adoptionDate">Data di Adozione:</label>
-            <input type="date" id="adoptionDate" name="adoptionDate">
-
-            <label for="photoUrl">URL della Foto:</label>
-            <input type="url" id="photoUrl" name="photoUrl">
-
-            <label for="notes">Note:</label>
-            <textarea id="notes" name="notes"></textarea>
-
-            <!-- Nuovi campi -->
-            <label for="deathDate">Data di Decesso (se applicabile):</label>
-            <input type="date" id="deathDate" name="deathDate">
-
-            <label for="microchipNumber">Numero di Microchip:</label>
-            <input type="text" id="microchipNumber" name="microchipNumber" required>
-
-            <label for="isSterilized">Sterilizzato:</label>
-            <input type="checkbox" id="isSterilized" name="sterilization.isSterilized">
-
-            <label for="sterilizationDate">Data di Sterilizzazione:</label>
-            <input type="date" id="sterilizationDate" name="sterilization.sterilizationDate">
-
-            <label for="method">Metodo di Sterilizzazione:</label>
-            <input type="text" id="method" name="sterilization.method">
-
-            <h3>Terapie Farmacologiche:</h3>
-            <div id="therapyContainer">
-                <div class="therapy">
-                    <label for="therapyName0">Nome della Terapia:</label>
-                    <input type="text" id="therapyName0" name="therapy[0].name">
-
-                    <label for="therapyDosage0">Dosaggio:</label>
-                    <input type="text" id="therapyDosage0" name="therapy[0].dosage">
-
-                    <label for="therapyStartDate0">Data Inizio:</label>
-                    <input type="date" id="therapyStartDate0" name="therapy[0].startDate">
-
-                    <label for="therapyEndDate0">Data Fine:</label>
-                    <input type="date" id="therapyEndDate0" name="therapy[0].endDate">
+    <body>
+        <div class="animal-create-container mt-5">
+            <h1 class="animal-create-title text-center mb-4">Crea Nuovo Animale</h1>
+            <form action="/dashboard/animals/add-animals" method="POST" class="animal-create-form">
+                <div class="form-group">
+                    <label for="name">Nome:</label>
+                    <input type="text" id="name" name="name" class="form-control" required>
                 </div>
+
+                <div class="form-group">
+                    <label for="species">Specie:</label>
+                    <input type="text" id="species" name="species" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="breed">Razza:</label>
+                    <input type="text" id="breed" name="breed" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="age">Età:</label>
+                    <input type="number" id="age" name="age" class="form-control" min="0">
+                </div>
+
+                <div class="form-group">
+                    <label for="gender">Genere:</label>
+                    <select id="gender" name="gender" class="form-control" required>
+                        <option value="Male">Maschio</option>
+                        <option value="Female">Femmina</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Descrizione:</label>
+                    <textarea id="description" name="description" class="form-control"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="arrivalDate">Data di Arrivo:</label>
+                    <input type="date" id="arrivalDate" name="arrivalDate" class="form-control">
+                </div>
+
+                <div class="form-group form-check">
+                    <label for="adopted">Adottato:</label>
+                    <input type="checkbox" id="adopted" name="adopted" class="form-check-input">
+                </div>
+
+                <div class="form-group">
+                    <label for="healthStatus">Stato di Salute:</label>
+                    <input type="text" id="healthStatus" name="healthStatus" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="vaccinations">Vaccinazioni (separate da virgole):</label>
+                    <input type="text" id="vaccinations" name="vaccinations" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="adoptionDate">Data di Adozione:</label>
+                    <input type="date" id="adoptionDate" name="adoptionDate" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="photoUrl">URL della Foto:</label>
+                    <input type="url" id="photoUrl" name="photoUrl" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Note:</label>
+                    <textarea id="notes" name="notes" class="form-control"></textarea>
+                </div>
+
+                <!-- Nuovi campi -->
+                <div class="form-group">
+                    <label for="deathDate">Data di Decesso (se applicabile):</label>
+                    <input type="date" id="deathDate" name="deathDate" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="microchipNumber">Numero di Microchip:</label>
+                    <input type="text" id="microchipNumber" name="microchipNumber" class="form-control" required>
+                </div>
+
+                <div class="form-group form-check">
+                    <label for="isSterilized">Sterilizzato:</label>
+                    <input type="checkbox" id="isSterilized" name="sterilization.isSterilized" class="form-check-input">
+                </div>
+
+                <div class="form-group">
+                    <label for="sterilizationDate">Data di Sterilizzazione:</label>
+                    <input type="date" id="sterilizationDate" name="sterilization.sterilizationDate"
+                        class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="method">Metodo di Sterilizzazione:</label>
+                    <input type="text" id="method" name="sterilization.method" class="form-control">
+                </div>
+
+                <h3 class="mt-4">Terapie Farmacologiche:</h3>
+                <div id="therapyContainer">
+                    <div class="therapy">
+                        <div class="form-group">
+                            <label for="therapyName0">Nome della Terapia:</label>
+                            <input type="text" id="therapyName0" name="therapy[0].name" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="therapyDosage0">Dosaggio:</label>
+                            <input type="text" id="therapyDosage0" name="therapy[0].dosage" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="therapyStartDate0">Data Inizio:</label>
+                            <input type="date" id="therapyStartDate0" name="therapy[0].startDate" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="therapyEndDate0">Data Fine:</label>
+                            <input type="date" id="therapyEndDate0" name="therapy[0].endDate" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-info mt-3" onclick="addTherapy()">Aggiungi Terapia</button>
+
+                <button type="submit" class="btn btn-success mt-4">Crea Animale</button>
+            </form>
+        </div>
+
+        <script>
+            let therapyIndex = 1;
+
+            function addTherapy() {
+                const container = document.getElementById('therapyContainer');
+                const newTherapy = document.createElement('div');
+                newTherapy.classList.add('therapy');
+
+                newTherapy.innerHTML = `
+            <div class="form-group">
+                <label for="therapyName${therapyIndex}">Nome della Terapia:</label>
+                <input type="text" id="therapyName${therapyIndex}" name="therapy[${therapyIndex}].name" class="form-control">
             </div>
 
-            <button type="button" onclick="addTherapy()">Aggiungi Terapia</button>
-
-            <button type="submit">Crea Animale</button>
-        </form>
-    </div>
-
-    <script>
-        let therapyIndex = 1;
-
-        function addTherapy() {
-            const container = document.getElementById('therapyContainer');
-            const newTherapy = document.createElement('div');
-            newTherapy.classList.add('therapy');
-
-            newTherapy.innerHTML = `
-                <label for="therapyName${therapyIndex}">Nome della Terapia:</label>
-                <input type="text" id="therapyName${therapyIndex}" name="therapy[${therapyIndex}].name">
-
+            <div class="form-group">
                 <label for="therapyDosage${therapyIndex}">Dosaggio:</label>
-                <input type="text" id="therapyDosage${therapyIndex}" name="therapy[${therapyIndex}].dosage">
+                <input type="text" id="therapyDosage${therapyIndex}" name="therapy[${therapyIndex}].dosage" class="form-control">
+            </div>
 
+            <div class="form-group">
                 <label for="therapyStartDate${therapyIndex}">Data Inizio:</label>
-                <input type="date" id="therapyStartDate${therapyIndex}" name="therapy[${therapyIndex}].startDate">
+                <input type="date" id="therapyStartDate${therapyIndex}" name="therapy[${therapyIndex}].startDate" class="form-control">
+            </div>
 
+            <div class="form-group">
                 <label for="therapyEndDate${therapyIndex}">Data Fine:</label>
-                <input type="date" id="therapyEndDate${therapyIndex}" name="therapy[${therapyIndex}].endDate">
-            `;
+                <input type="date" id="therapyEndDate${therapyIndex}" name="therapy[${therapyIndex}].endDate" class="form-control">
+            </div>
+        `;
 
-            container.appendChild(newTherapy);
-            therapyIndex++;
-        }
-    </script>
-</body>
+                container.appendChild(newTherapy);
+                therapyIndex++;
+            }
+        </script>
+    </body>
 
 </html>
