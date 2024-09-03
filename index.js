@@ -1,4 +1,5 @@
 const express = require('express')
+const fileUpload = require('express-fileupload')
 const mongoose = require('mongoose')
 const path = require('path')
 const dotenv = require('dotenv')
@@ -8,14 +9,14 @@ const passport = require('passport')
 const session = require('express-session')
 const methodOverride = require('method-override')
 const loginPassport = require('./config/loginPassport')
-dotenv.config()
-
 const ensureAuth = require('./middleware/ensureAuth')
 const dashboard = require('./routes/dashboard')
 const auth = require('./routes/auth')
+dotenv.config()
 
-app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
+app.use(fileUpload())
+app.use(express.json())
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
     secret: 'secret', // Cambia questa con una chiave segreta forte

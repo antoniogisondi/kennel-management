@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const path = require('path')
 const Animal = require('../models/Animal')
 
 router.get('/dashboard', (req, res) => {
@@ -26,16 +27,73 @@ router.get('/dashboard/animals/add-animals', (req, res) => {
 
 router.post('/dashboard/animals/add-animals', async (req, res) => {
     try {
-        if (req.body.therapy) {
-            req.body.therapy = req.body.therapy.filter(t => t.name || t.dosage || t.startDate || t.endDate);
-        }
-        const savedAnimal = new Animal(req.body);
+        const {
+            name, species, breed, age, gender, description, arrivalDate, adopted, healthStatus, vaccinations,
+            adoptionDate, notes, deathDate, microchipNumber, isSterilized, sterilizationDate, method, therapy,
+        } = req.body;
+
+        const photo = req.files.photo;
+        const uploadPath = path.join(__dirname, '../public/uploads', photo.name);
+
+        // Sposta il file nella cartella desiderata
+        photo.mv(uploadPath, function (err) {
+            if (err) {
+                console.error(err);
+                return res.status(500).send('Errore nel caricamento del file');
+            }
+        });
+
+        // Se il campo therapy non è un array (ad esempio, se c'è solo una terapia), trasformalo in un array
+        const therapyData = Array.isArray(therapy) ? therapy : [];
+
+        // Filtra le terapie vuote
+        const filteredTherapies = therapyData
+            .map(t => {
+                // Controlla se t è definito e se ha una proprietà name
+                if (t && t.name) {
+                    return {
+                        name: t.name.trim(),
+                        dosage: t.dosage?.trim(),
+                        startDate: t.startDate ? new Date(t.startDate) : null,
+                        endDate: t.endDate ? new Date(t.endDate) : null,
+                    };
+                }
+                return null;
+            })
+            .filter(t => t !== null);
+
+        // Creazione di un nuovo documento Animal
+        const savedAnimal = new Animal({
+            name,
+            species,
+            breed,
+            age,
+            gender,
+            description,
+            arrivalDate,
+            adopted: adopted || false,
+            healthStatus,
+            vaccinations: vaccinations ? vaccinations.split(',') : [],
+            adoptionDate,
+            notes,
+            deathDate,
+            microchipNumber,
+            sterilization: {
+                isSterilized: isSterilized || false,
+                sterilizationDate,
+                method,
+            },
+            therapy: filteredTherapies,
+            photo: `/uploads/${photo.name}`, // Salva il percorso del file
+        });
         const animal = await savedAnimal.save();
         res.redirect('/dashboard/animals')
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 })
+
+
 
 router.get('/dashboard/animals/:id', async (req, res) => {
     try {

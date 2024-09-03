@@ -37,3 +37,6 @@ docker-compose.override.yml
 *.pem
 *.crt
 *.key
+
+
+/public/uploads/*

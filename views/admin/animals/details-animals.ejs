@@ -50,10 +50,10 @@
                     <%= animal.vaccinations.join(', ') %></p>
         </div>
 
-        <% if (animal.photoUrl) { %>
+        <% if (animal.photo) { %>
         <div class="detail-section">
             <h2>Foto</h2>
-            <img src="<%= animal.photoUrl %>" alt="Foto di <%= animal.name %>" style="max-width: 100%;">
+            <img src="<%= animal.photo %>" alt="Foto di <%= animal.name %>" style="max-width: 100%;">
         </div>
         <% } %>
 

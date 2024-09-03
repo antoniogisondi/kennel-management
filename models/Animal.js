@@ -12,7 +12,7 @@ const AnimalSchema = new mongoose.Schema({
     healthStatus: { type: String }, // e.g., Healthy, Needs attention, etc.
     vaccinations: [{ type: String }], // e.g., Rabies, Distemper, etc.
     adoptionDate: { type: Date },
-    photoUrl: { type: String }, // URL for the animal's photo
+    photo: { type: String }, // URL for the animal's photo
     notes: { type: String }, // Additional notes
 
     // Nuovi campi
