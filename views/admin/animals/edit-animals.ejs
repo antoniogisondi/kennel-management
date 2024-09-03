@@ -71,7 +71,7 @@
                 <input type="text" id="method" name="sterilization.method" value="<%= animal.sterilization.method %>">
 
                 <h3>Terapie Farmacologiche:</h3>
-                <div id="therapyContainer">
+                <div id="therapyContainer" data-therapy-index="<%=animal.therapy.index%>">
                     <% animal.therapy.forEach(function(therapy, index) { %>
                         <div class="therapy">
                             <label for="therapyName<%= index %>">Nome della Terapia:</label>
@@ -93,38 +93,11 @@
                         <% }) %>
                 </div>
 
-                <button type="button" onclick="addTherapy()">Aggiungi Terapia</button>
+                <button type="button" onclick="addTherapyEdit()">Aggiungi Terapia</button>
 
                 <button type="submit">Aggiorna Animale</button>
             </form>
         </div>
-
-        <script>
-            let therapyIndex = <%= animal.therapy.length %>;
-
-            function addTherapy() {
-                const container = document.getElementById('therapyContainer');
-                const newTherapy = document.createElement('div');
-                newTherapy.classList.add('therapy');
-
-                newTherapy.innerHTML = `
-                <label for="therapyName${therapyIndex}">Nome della Terapia:</label>
-                <input type="text" id="therapyName${therapyIndex}" name="therapy[${therapyIndex}].name">
-
-                <label for="therapyDosage${therapyIndex}">Dosaggio:</label>
-                <input type="text" id="therapyDosage${therapyIndex}" name="therapy[${therapyIndex}].dosage">
-
-                <label for="therapyStartDate${therapyIndex}">Data Inizio:</label>
-                <input type="date" id="therapyStartDate${therapyIndex}" name="therapy[${therapyIndex}].startDate">
-
-                <label for="therapyEndDate${therapyIndex}">Data Fine:</label>
-                <input type="date" id="therapyEndDate${therapyIndex}" name="therapy[${therapyIndex}].endDate">
-            `;
-
-                container.appendChild(newTherapy);
-                therapyIndex++;
-            }
-        </script>
     </body>
 
 </html>

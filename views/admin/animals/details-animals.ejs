@@ -10,35 +10,39 @@
 
             <div class="detail-section">
                 <h2>Informazioni Generali</h2>
-                <p><strong>Nome:</strong>
-                    <%= animal.name %>
-                </p>
-                <p><strong>Specie:</strong>
-                    <%= animal.species %>
-                </p>
-                <p><strong>Razza:</strong>
-                    <%= animal.breed %>
-                </p>
-                <p><strong>Età:</strong>
-                    <%= animal.age %> anni
-                </p>
-                <p><strong>Genere:</strong>
-                    <%= animal.gender %>
-                </p>
-                <p><strong>Descrizione:</strong>
-                    <%= animal.description %>
-                </p>
-                <p><strong>Data di Arrivo:</strong>
-                    <%= animal.arrivalDate.toDateString() %>
-                </p>
-                <p><strong>Adottato:</strong>
-                    <%= animal.adopted ? 'Sì' : 'No' %>
-                </p>
-                <% if (animal.adopted && animal.adoptionDate) { %>
-                    <p><strong>Data di Adozione:</strong>
-                        <%= animal.adoptionDate.toDateString() %>
-                    </p>
+                <% if (animal.photo) { %>
+                    <h2>Foto</h2>
+                    <img src="<%= animal.photo %>" alt="Foto di <%= animal.name %>" style="max-width: 50%;">
                     <% } %>
+                        <p><strong>Nome:</strong>
+                            <%= animal.name %>
+                        </p>
+                        <p><strong>Specie:</strong>
+                            <%= animal.species %>
+                        </p>
+                        <p><strong>Razza:</strong>
+                            <%= animal.breed %>
+                        </p>
+                        <p><strong>Età:</strong>
+                            <%= animal.age %> anni
+                        </p>
+                        <p><strong>Genere:</strong>
+                            <%= animal.gender %>
+                        </p>
+                        <p><strong>Descrizione:</strong>
+                            <%= animal.description %>
+                        </p>
+                        <p><strong>Data di Arrivo:</strong>
+                            <%= animal.arrivalDate.toDateString() %>
+                        </p>
+                        <p><strong>Adottato:</strong>
+                            <%= animal.adopted ? 'Sì' : 'No' %>
+                        </p>
+                        <% if (animal.adopted && animal.adoptionDate) { %>
+                            <p><strong>Data di Adozione:</strong>
+                                <%= animal.adoptionDate.toDateString() %>
+                            </p>
+                            <% } %>
             </div>
 
             <div class="detail-section">
@@ -49,13 +53,6 @@
                 <p><strong>Vaccinazioni:</strong>
                     <%= animal.vaccinations.join(', ') %></p>
         </div>
-
-        <% if (animal.photo) { %>
-        <div class="detail-section">
-            <h2>Foto</h2>
-            <img src="<%= animal.photo %>" alt="Foto di <%= animal.name %>" style="max-width: 100%;">
-        </div>
-        <% } %>
 
         <div class="detail-section">
             <h2>Altre Informazioni</h2>
