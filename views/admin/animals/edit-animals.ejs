@@ -74,7 +74,7 @@
                 <div id="therapyContainer" data-therapy-index="<%=animal.therapy.index%>">
                     <% animal.therapy.forEach(function(therapy, index) { %>
                         <div class="therapy">
-                            <label for="therapyName<%= index %>">Nome della Terapia:</label>
+                            <label for="therapyName<%= index %>">Nome del Farmaco:</label>
                             <input type="text" id="therapyName<%= index %>" name="therapy[<%= index %>].name"
                                 value="<%= therapy.name %>">
 

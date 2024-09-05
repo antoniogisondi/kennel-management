@@ -4,77 +4,23 @@
 <%- include('partials/head') %>
 
     <body>
-        <div class="container mt-5">
-            <div class="dashboard-header text-center mb-5">
-                <h1 class="display-4">Pannello di Controllo del Canile</h1>
-                <p class="lead">Gestisci gli animali, adozioni, e altro</p>
-            </div>
-            <div class="row justify-content-center mb-4">
+        <div class="container-fluid vh-100 d-flex justify-content-center align-items-center">
+            <div class="row w-100 justify-content-center">
                 <div class="col-md-6">
-                    <div class="card shadow-sm">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Accedi al Sistema</h5>
-                            <p class="card-text">Se sei già registrato, accedi per gestire il canile.</p>
-                            <a href="/login" class="btn btn-primary me-2">Effettua il Login</a>
-                            <a href="/register" class="btn btn-secondary">Registrati</a>
-                        </div>
+                    <!-- Header -->
+                    <div class="dashboard-header text-center mb-5">
+                        <h1 class="display-4 custom-title">Pannello di Controllo del Canile</h1>
+                        <p class="lead custom-subtitle">Gestisci gli animali, adozioni, e altro</p>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card shadow-sm">
+
+                    <!-- Login and Register Section -->
+                    <div class="card shadow-sm custom-card">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Gestisci Animali</h5>
-                            <p class="card-text">Visualizza e modifica le informazioni sugli animali.</p>
-                            <a href="/animals" class="btn btn-primary">Vai alla Gestione Animali</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card shadow-sm">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Adottanti e Adozioni</h5>
-                            <p class="card-text">Gestisci le adozioni e i profili degli adottanti.</p>
-                            <a href="/adoptions" class="btn btn-primary">Gestisci Adozioni</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card shadow-sm">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Statistiche e Report</h5>
-                            <p class="card-text">Visualizza le statistiche del canile e genera report.</p>
-                            <a href="/reports" class="btn btn-primary">Visualizza Statistiche</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-4">
-                <div class="col-md-4">
-                    <div class="card shadow-sm">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Gestione Volontari</h5>
-                            <p class="card-text">Organizza i turni e gestisci i volontari.</p>
-                            <a href="/volunteers" class="btn btn-primary">Gestisci Volontari</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card shadow-sm">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Donazioni</h5>
-                            <p class="card-text">Monitora e gestisci le donazioni ricevute.</p>
-                            <a href="/donations" class="btn btn-primary">Gestisci Donazioni</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card shadow-sm">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Impostazioni</h5>
-                            <p class="card-text">Configura il sistema e gestisci gli utenti.</p>
-                            <a href="/settings" class="btn btn-primary">Vai alle Impostazioni</a>
+                            <h5 class="card-title custom-card-title mb-3">Accedi al Sistema</h5>
+                            <p class="card-text custom-card-text mb-4">Se sei già registrato, accedi per gestire il
+                                canile.</p>
+                            <a href="/login" class="btn btn-primary me-2 custom-btn">Effettua il Login</a>
+                            <a href="/register" class="btn btn-secondary custom-btn">Registrati</a>
                         </div>
                     </div>
                 </div>

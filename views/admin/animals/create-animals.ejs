@@ -105,7 +105,7 @@
                 <div id="therapyContainer">
                     <div class="therapy">
                         <div class="form-group">
-                            <label for="therapyName0">Nome della Terapia:</label>
+                            <label for="therapyName0">Nome del Farmaco:</label>
                             <input type="text" id="therapyName0" name="therapy[0].name" class="form-control">
                         </div>
 
@@ -131,39 +131,6 @@
                 <button type="submit" class="btn btn-success mt-4">Crea Animale</button>
             </form>
         </div>
-
-        <script>
-            // Funzioni per abilitare/disabilitare i campi di adozione e sterilizzazione
-            function toggleAdoptionDate() {
-                const adoptedCheckbox = document.getElementById('adopted');
-                const adoptionDateInput = document.getElementById('adoptionDate');
-
-                if (adoptedCheckbox.checked) {
-                    adoptionDateInput.disabled = false;
-                } else {
-                    adoptionDateInput.disabled = true;
-                    adoptionDateInput.value = ''; // Resetta il valore della data se disabilitato
-                }
-            }
-
-            function toggleSterilizationDate() {
-                const isSterilizedCheckbox = document.getElementById('isSterilized');
-                const sterilizationDateInput = document.getElementById('sterilizationDate');
-
-                if (isSterilizedCheckbox.checked) {
-                    sterilizationDateInput.disabled = false;
-                } else {
-                    sterilizationDateInput.disabled = true;
-                    sterilizationDateInput.value = ''; // Resetta il valore della data se disabilitato
-                }
-            }
-
-            // Assicura che le funzioni vengano eseguite all'avvio per impostare lo stato corretto
-            document.addEventListener('DOMContentLoaded', function () {
-                toggleAdoptionDate();
-                toggleSterilizationDate();
-            });
-        </script>
     </body>
 
 </html>

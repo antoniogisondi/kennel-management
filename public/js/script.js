@@ -23,10 +23,12 @@ export function addTherapyEdit() {
 }
 
 export function addTherapy() {
-    let therapyIndex = 1;
     const container = document.getElementById('therapyContainer');
+    const therapyIndex = container.children.length; // Conta quanti div terapia esistono
+
     const newTherapy = document.createElement('div');
     newTherapy.classList.add('therapy');
+    newTherapy.id = `therapy-${therapyIndex}`; // Assegna un ID univoco a ogni blocco di terapia
 
     newTherapy.innerHTML = `
         <div class="form-group">
@@ -48,11 +50,21 @@ export function addTherapy() {
             <label for="therapyEndDate${therapyIndex}">Data Fine:</label>
             <input type="date" id="therapyEndDate${therapyIndex}" name="therapy[${therapyIndex}].endDate" class="form-control">
         </div>
+
+        <!-- Bottone per eliminare la terapia -->
+        <button type="button" class="btn btn-danger" onclick="removeTherapy(${therapyIndex})">Elimina Terapia</button>
     `;
 
     container.appendChild(newTherapy);
-    therapyIndex++;
 }
+
+export function removeTherapy(index) {
+    const therapyElement = document.getElementById(`therapy-${index}`);
+    if (therapyElement) {
+        therapyElement.remove(); // Rimuove l'elemento dal DOM
+    }
+}
+
 
 // Funzioni per abilitare/disabilitare i campi di adozione e sterilizzazione
 export function toggleAdoptionDate() {
@@ -81,9 +93,10 @@ export function toggleSterilizationDate() {
 
 // Assicura che le funzioni vengano eseguite all'avvio per impostare lo stato corretto
 document.addEventListener('DOMContentLoaded', function () {
-    toggleAdoptionDate();
-    toggleSterilizationDate();
+    window.toggleAdoptionDate = toggleAdoptionDate;
+    window.toggleSterilizationDate = toggleSterilizationDate;
 });
 
 window.addTherapy = addTherapy
 window.addTherapyEdit = addTherapyEdit
+window.removeTherapy = removeTherapy
