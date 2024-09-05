@@ -100,3 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
 window.addTherapy = addTherapy
 window.addTherapyEdit = addTherapyEdit
 window.removeTherapy = removeTherapy
+
+window.addEventListener('load', function () {
+    document.body.classList.add('loaded');
+});

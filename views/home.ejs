@@ -4,28 +4,27 @@
 <%- include('partials/head') %>
 
     <body>
-        <div class="container-fluid vh-100 d-flex justify-content-center align-items-center">
-            <div class="row w-100 justify-content-center">
+        <main class="container-fluid vh-100 d-flex justify-content-center align-items-center">
+            <div class="row d-flex justify-content-center">
                 <div class="col-md-6">
-                    <!-- Header -->
-                    <div class="dashboard-header text-center mb-5">
-                        <h1 class="display-4 custom-title">Pannello di Controllo del Canile</h1>
-                        <p class="lead custom-subtitle">Gestisci gli animali, adozioni, e altro</p>
-                    </div>
-
                     <!-- Login and Register Section -->
-                    <div class="card shadow-sm custom-card">
+                    <div class="card">
+                        <!-- Header -->
+                        <div class="text-center mb-5">
+                            <h1 class="">Pannello di Controllo del Canile</h1>
+                            <p class="">Gestisci gli animali, adozioni, e altro</p>
+                        </div>
                         <div class="card-body text-center">
-                            <h5 class="card-title custom-card-title mb-3">Accedi al Sistema</h5>
-                            <p class="card-text custom-card-text mb-4">Se sei già registrato, accedi per gestire il
+                            <h5 class="card-title mb-3">Accedi al Sistema</h5>
+                            <p class="card-text mb-4">Se sei già registrato, accedi per gestire il
                                 canile.</p>
-                            <a href="/login" class="btn btn-primary me-2 custom-btn">Effettua il Login</a>
-                            <a href="/register" class="btn btn-secondary custom-btn">Registrati</a>
+                            <a href="/login" class="btn btn-primary me-2">Effettua il Login</a>
+                            <a href="/register" class="btn btn-secondary">Registrati</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
     </body>
 
 </html>

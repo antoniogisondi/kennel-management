@@ -17,6 +17,7 @@ dotenv.config()
 app.use(express.urlencoded({ extended: true }));
 app.use(fileUpload())
 app.use(express.json())
+app.use(express.static(path.join(__dirname, '/node_modules/bootstrap/dist')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
     secret: 'secret', // Cambia questa con una chiave segreta forte
